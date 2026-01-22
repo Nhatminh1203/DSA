@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+bool isprime[10000001];
+ll n= 10000000;
+void sieve(){
+    for(int i = 0 ; i <= n; i++){
+        isprime[i] = true;
+    }
+    isprime[0] = false;
+    isprime[1] = false;
+
+    for(int i = 2; i * i <= n; i++){
+        if(isprime[i] == true){
+            for(int j = i * 2; j <= n; j += i) isprime[j] = false;
+        }
+    }
+}
+
+bool checkPrime(ll x){
+    while(x > 0){
+        if(!isprime[x]){
+            return 0;
+        }
+        x/=10;
+    }
+    return 1;
+}
+
+int main(){
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    ll l , r;
+    ll count = 0;
+    sieve();
+    cin >> l >> r;
+    for(ll i = l; i <= r; i++){
+        if(checkPrime(i)) count++;
+    }
+    cout << count;
+}
