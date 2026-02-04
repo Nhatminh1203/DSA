@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int n;
+char a[21];
+char s[2] = {'H', 'A'};
+
+bool check(){
+    if(a[1] != 'H' || a[n] != 'A') return false;
+    for(int i = 2; i <= n - 1; i++){
+        if(a[i] == 'H' && a[i-1] == 'H') return false;
+    }
+    return true;
+}
+void Try(int pos){
+    if(pos > n){
+        if(!check()) return;
+        for(int i = 1; i <= n; i++){
+            cout << a[i];
+        }
+        cout << "\n";
+        return;
+    }
+
+    for(int i = 1; i >= 0; i--){
+        a[pos] = s[i];
+        Try(pos + 1);
+    }
+}
+
+int main(){
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    int t;
+    cin >> t;
+    while(t--){
+        cin >> n;
+        Try(1);
+    }
+}
